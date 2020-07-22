@@ -1,26 +1,64 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.scss';
+import React, { Component } from 'react'
+import Person from './components/person'
+import School from './components/school'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      data: {
+        name: "Bagus",
+        age: 20,
+        school: "MIT"
+      },
+      mount: true
+    }
+    console.log('constructor')
+  }
+
+  componentDidMount() {
+    console.log('componentDidMount')
+  }
+
+  handleChangeName = (event) => {
+    this.setState({
+      data: {
+        ...this.state.data,
+        name: 'Taufan'
+      }
+    })
+  }
+
+  handleChangeSchool = (event) => {
+    this.setState({
+      data: {
+        ...this.state.data,
+        school: 'UI'
+      }
+    })
+  }
+
+  handleUnmount = () => {
+    this.setState({
+      ...this.state,
+      mount: false
+    })
+  }
+
+  render() {
+    console.log('render')
+    return (
+      <div>
+        {
+          this.state.mount ? <Person name={this.state.data.name} age={this.state.data.age} /> : null
+        }
+        <School school={this.state.data.school} />
+        <button onClick={this.handleChangeName}>Ubah State</button>
+        <button onClick={this.handleChangeSchool}>Ubah School</button>
+        <button onClick={this.handleUnmount}>Unmount</button>
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
