@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import Person from './components/person'
 import School from './components/school'
 
@@ -33,7 +33,7 @@ const App = () => {
   }
 
   return (
-    <div>
+    <Fragment>
       {
         mount ? <Person name={data.name} age={data.age} /> : null
       }
@@ -41,7 +41,7 @@ const App = () => {
       <button onClick={handleChangeName}>Ubah State</button>
       <button onClick={handleChangeSchool}>Ubah School</button>
       <button onClick={handleUnmount}>Unmount</button>
-    </div>
+    </Fragment>
   )
 }
 
