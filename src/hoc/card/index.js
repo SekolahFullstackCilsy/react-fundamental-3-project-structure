@@ -2,12 +2,13 @@ import React from 'react'
 
 import './index.scss'
 
-const CardHOC = (props) => {
+const cardHOC = (WrapComponent) => (Component) => (props) => {
   return (
     <div className="container">
-      {props.children}
+      <WrapComponent {...props} />
+      <Component {...props} />
     </div>
   )
 }
 
-export default CardHOC
+export default cardHOC
