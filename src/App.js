@@ -1,6 +1,7 @@
 import React, { useEffect, useState, Fragment } from 'react'
 import Person from './components/person'
 import School from './components/school'
+import CardHOC from './hoc/card'
 
 const App = () => {
   useEffect(() => {
@@ -41,6 +42,14 @@ const App = () => {
       <button onClick={handleChangeName}>Ubah State</button>
       <button onClick={handleChangeSchool}>Ubah School</button>
       <button onClick={handleUnmount}>Unmount</button>
+
+      <CardHOC>
+        <p>Halo Semua</p>
+        <p>Halo Semua</p>
+        <button>Button</button>
+        <input></input>
+      </CardHOC>
+
     </Fragment>
   )
 }
