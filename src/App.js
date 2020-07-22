@@ -1,64 +1,48 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import Person from './components/person'
 import School from './components/school'
 
-class App extends Component {
-  constructor() {
-    super()
-    this.state = {
-      data: {
-        name: "Bagus",
-        age: 20,
-        school: "MIT"
-      },
-      mount: true
-    }
-    console.log('constructor')
-  }
-
-  componentDidMount() {
+const App = () => {
+  useEffect(() => {
     console.log('componentDidMount')
+  }, [])
+
+  const [data, setData] = useState({
+    name: 'Bagus',
+    age: 20,
+    school: 'MIT'
+  })
+  const [mount, setMount] = useState(true)
+
+  const handleChangeName = () => {
+    setData({
+      ...data,
+      name: 'Taufan'
+    })
   }
 
-  handleChangeName = (event) => {
-    this.setState({
-      data: {
-        ...this.state.data,
-        name: 'Taufan'
+  const handleChangeSchool = () => {
+    setData({
+      ...data,
+      school: 'UI'
+    })
+  }
+
+  const handleUnmount = () => {
+    setMount(false)
+  }
+
+  return (
+    <div>
+      {
+        mount ? <Person name={data.name} age={data.age} /> : null
       }
-    })
-  }
-
-  handleChangeSchool = (event) => {
-    this.setState({
-      data: {
-        ...this.state.data,
-        school: 'UI'
-      }
-    })
-  }
-
-  handleUnmount = () => {
-    this.setState({
-      ...this.state,
-      mount: false
-    })
-  }
-
-  render() {
-    console.log('render')
-    return (
-      <div>
-        {
-          this.state.mount ? <Person name={this.state.data.name} age={this.state.data.age} /> : null
-        }
-        <School school={this.state.data.school} />
-        <button onClick={this.handleChangeName}>Ubah State</button>
-        <button onClick={this.handleChangeSchool}>Ubah School</button>
-        <button onClick={this.handleUnmount}>Unmount</button>
-      </div>
-    )
-  }
+      <School school={data.school} />
+      <button onClick={handleChangeName}>Ubah State</button>
+      <button onClick={handleChangeSchool}>Ubah School</button>
+      <button onClick={handleUnmount}>Unmount</button>
+    </div>
+  )
 }
 
 export default App

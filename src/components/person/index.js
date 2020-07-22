@@ -1,27 +1,22 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 
-class Person extends Component {
-  componentWillReceiveProps(nextProps) {
-    console.log(this.props)
-    console.log(nextProps)
-  }
-
-  componentDidUpdate() {
+const Person = (props) => {
+  useEffect(() => {
     console.log('componentDidUpdate')
-  }
+  }, [props])
 
-  componentWillUnmount() {
-    console.log('componentWillUnmount')
-  }
+  useEffect(() => {
+    return () => {
+      console.log('componentWillUnmount')
+    }
+  }, [])
 
-  render() {
-    return (
-      <div>
-        <p>Hello my name is {this.props.name}</p>
-        <p>I'm {this.props.age} years old</p>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <p>Hello my name is {props.name}</p>
+      <p>I'm {props.age} years old</p>
+    </div>
+  )
 }
 
 export default Person
